@@ -15,6 +15,7 @@ Ce projet implémente une architecture microservices pour un système d'e-commer
 
 ### Architecture
 
+```
 lab5/
 ├── README.md
 ├── docker-compose.yml
@@ -51,6 +52,7 @@ lab5/
     ├── prometheus.yml
     └── grafana/
         └── dashboards/
+```
 
 ## Déploiement
 
