@@ -20,7 +20,6 @@ lab5/
 ├── docker-compose.yml
 ├── load_test.py
 ├── docs/
-│   ├── architecture.md
 │   └── adr/
 │       ├── 001-api.md
 │       └── 002-load-balancing.md
