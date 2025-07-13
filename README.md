@@ -22,8 +22,8 @@ lab5/
 ├── docs/
 │   ├── architecture.md
 │   └── adr/
-│       ├── 001-api-gateway-choice.md
-│       └── 002-load-balancing-strategy.md
+│       ├── 001-api.md
+│       └── 002-load-balancing.md
 ├── gateway/
 │   ├── Dockerfile
 │   ├── app.py
