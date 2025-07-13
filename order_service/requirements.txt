@@ -1,0 +1,6 @@
+Flask==2.3.3
+Flask-CORS==4.0.0
+requests==2.31.0
+gunicorn==21.2.0
+prometheus-client==0.17.1
+prometheus-flask-exporter==0.20.3

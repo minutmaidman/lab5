@@ -1,0 +1,27 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['api-gateway:8080']
+
+  - job_name: 'products-service'
+    static_configs:
+      - targets: ['products-service-1:5001', 'products-service-2:5001']
+
+  - job_name: 'stock-service'
+    static_configs:
+      - targets: ['stock-service:5002']
+
+  - job_name: 'customers-service'
+    static_configs:
+      - targets: ['customers-service:5003']
+
+  - job_name: 'cart-service'
+    static_configs:
+      - targets: ['cart-service:5004']
+
+  - job_name: 'order-service'
+    static_configs:
+      - targets: ['order-service:5005']

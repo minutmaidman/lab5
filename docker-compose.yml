@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  api-gateway:
+    build: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - products-service-1
+      - products-service-2
+      - stock-service
+      - customers-service
+      - cart-service
+      - order-service
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - microservices-network
+
+  # Service Products (2 instances pour load balancing)
+  products-service-1:
+    build: ./products_service
+    environment:
+      - FLASK_ENV=production
+      - INSTANCE_ID=instance-1
+    networks:
+      - microservices-network
+
+  products-service-2:
+    build: ./products_service
+    environment:
+      - FLASK_ENV=production
+      - INSTANCE_ID=instance-2
+    networks:
+      - microservices-network
+
+  # Service Stock
+  stock-service:
+    build: ./stock_service
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - microservices-network
+
+  # Service Customers
+  customers-service:
+    build: ./customers_service
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - microservices-network
+
+  # Service Cart
+  cart-service:
+    build: ./cart_service
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - microservices-network
+
+  # Service Orders
+  order-service:
+    build: ./order_service
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - microservices-network
+    ports:
+      - "5005:5005"
+
+  # Prometheus pour monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - microservices-network
+
+  # Grafana pour visualisation
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - microservices-network
+
+volumes:
+  grafana-storage:
+
+networks:
+  microservices-network:
+    driver: bridge
